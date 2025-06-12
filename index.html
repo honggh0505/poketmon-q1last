@@ -16,11 +16,10 @@
     }
 
     body {
-  font-family: 'UhBeeJJIBBABBA', sans-serif;
-  text-align: center;
-  padding: 20px;
-  background: #fff8b0; /* 피카츄 느낌 노란 배경 */
-}
+      font-family: 'UhBeeJJIBBABBA', sans-serif;
+      text-align: center;
+      padding: 20px;
+      background: #fff8b0; /* 피카츄 느낌 노란 배경 */
     }
 
     h1 {
@@ -105,6 +104,17 @@
     <p id="result-description"></p>
     <a href="https://smartstore.naver.com/storinus/search?q=%ED%8F%AC%EC%BC%93%EB%AA%AC" class="button" target="_blank">관련 상품 보러 가기 🛍️</a>
     <button class="coupon-btn" onclick="alert('🎁 축하합니다! 10% 할인 쿠폰이 발급되었습니다.')">쿠폰 발급 받기 🎫</button>
+
+    <!-- 💬 댓글 입력 -->
+    <div style="margin-top: 30px;">
+      <h3>💬 나의 결과는?</h3>
+      <input type="text" id="commentInput" placeholder="예: 나는 피카츄 나왔어요! ⚡" style="padding: 10px; width: 80%; border-radius: 8px; border: 1px solid #ccc;">
+      <button onclick="addComment()" style="margin-top: 10px;" class="button">댓글 남기기</button>
+      <ul id="commentList" style="list-style: none; padding: 0; margin-top: 20px;"></ul>
+    </div>
+
+    <!-- 🔁 처음으로 돌아가기 -->
+    <button class="coupon-btn" onclick="goToStart()">처음으로 돌아가기 🔁</button>
   </div>
 
   <script>
@@ -182,6 +192,31 @@
       document.getElementById("result-title").innerHTML = `<strong>${result.name}</strong>`;
       document.getElementById("result-description").textContent = result.desc;
       document.getElementById("result-image").src = result.img;
+    }
+
+    function addComment() {
+      const input = document.getElementById("commentInput");
+      const comment = input.value.trim();
+      if (comment !== "") {
+        const li = document.createElement("li");
+        li.textContent = comment;
+        li.style.margin = "10px 0";
+        li.style.background = "#fffbe6";
+        li.style.padding = "10px";
+        li.style.borderRadius = "10px";
+        li.style.border = "1px solid #ddd";
+        document.getElementById("commentList").appendChild(li);
+        input.value = "";
+      }
+    }
+
+    function goToStart() {
+      current = 0;
+      answers.length = 0;
+      document.getElementById("result").style.display = "none";
+      document.getElementById("quiz").style.display = "none";
+      document.getElementById("start-screen").style.display = "block";
+      document.getElementById("progress-bar").style.width = "0%";
     }
   </script>
 </body>
